@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Exchange\Bot;
 
 class BotController extends Controller
 {
     public function index()
     {
+        $exchange = new Bot('https://finans.mynet.com/doviz/');
+        return $exchange->getAll();
         return view('index');
     }
 }
