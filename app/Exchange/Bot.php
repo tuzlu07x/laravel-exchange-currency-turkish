@@ -2,9 +2,14 @@
 
 namespace App\Exchange;
 
+use Illuminate\Support\Arr;
+
 class Bot
 {
     protected $exchange;
+    protected array $datas = [];
+    protected array $names = [];
+    protected $tables;
 
     public function __construct($exchange)
     {
@@ -21,24 +26,41 @@ class Bot
         return file_get_contents($this->exchange);
     }
 
-    public function getAll()
+    public function getBot()
     {
         $exchange = $this->exchange();
+        preg_match_all('@<strong class=\"mr-4\">\n<a href=\"(.*?)" title=\"(.*?)">(.*?)</a>\n</strong>@si', $exchange, $matches);
+        $this->names = $matches[2];
         preg_match_all('@<table class="scrollable wfull table-data search-table ">(.*?)</table>@si', $exchange, $matches);
-        $table = $matches[1][0];
-        preg_match_all('@<td>(.*?)</td>@si', $table, $matches);
-        $data = $matches[1];
-        preg_match_all('@<td class="text-center">(.*?)</td>@si', $table, $matches);
-        $data2 = $matches[1];
-        $array_map = array_map(function ($data1, $data2) {
+        $this->tables = $matches[1][0];
+        preg_match_all('@<td class="text-center">(.*?)</td>@si', $this->tables, $matches);
+        $this->datas = $matches[1];
+    }
+
+    public function getAll()
+    {
+        $this->getBot();
+
+        $filterDatas = array_filter($this->datas, function ($value) {
+            return strpos($value, '<') === false;
+        });
+        $mapDatas = array_map('trim', $filterDatas);
+        $mapNames = array_map('trim', $this->names);
+
+        $chunkDatas = array_chunk($mapDatas, 4);
+
+        $array = array_map(function ($chunkDatas, $mapNames) {
             return [
-                'name' => $data1,
-                'value' => [
-                    'buy' => $data2[0],
-                    'sell' => $data2[1],
-                ]
+                'name' => $mapNames,
+                'data' => $chunkDatas,
             ];
-        }, $data, $data2);
-        return $array_map;
+        }, $chunkDatas, $mapNames);
+
+        return $array;
+    }
+
+    public function getShowAll()
+    {
+        return $this->getAll();
     }
 }
