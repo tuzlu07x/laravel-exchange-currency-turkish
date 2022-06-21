@@ -9,7 +9,7 @@ class BotController extends Controller
 {
     public function index()
     {
-        $exchange = new Exchange();
-        return $exchange->callExchange();
+        $exchanges = Exchange::all();
+        return $exchanges;
     }
 }
