@@ -10,6 +10,6 @@ class BotController extends Controller
     public function index()
     {
         $exchanges = Exchange::all();
-        return $exchanges;
+        return json_decode($exchanges);
     }
 }
