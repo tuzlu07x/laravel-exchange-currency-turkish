@@ -36,8 +36,8 @@ class ExchangeCommand extends Command
             $exchange = Exchange::updateOrCreate([
                 'name' => $bot['name'],
             ], [
-                'buy' => $bot['data'][0],
-                'sell' => $bot['data'][1],
+                'sell' => $bot['data'][0],
+                'buy' => $bot['data'][1],
                 'differance' => $bot['data'][2],
                 'time' => $bot['data'][3],
             ]);
