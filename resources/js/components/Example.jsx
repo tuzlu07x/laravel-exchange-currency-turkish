@@ -24,7 +24,7 @@ function Example() {
 
                     {bots.map(bot => (
                         <div className='col-md-3 mt-3'>
-                            <div className='card'>
+                            <div className='card text-bg-primary'>
                                 <div className='card-header'>
                                     {bot.name}
 
