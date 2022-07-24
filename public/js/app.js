@@ -5459,8 +5459,7 @@ function Example() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     axios__WEBPACK_IMPORTED_MODULE_2___default().get('/borsa-bot/bot').then(function (response) {
-      setBot(response.data);
-      console.log(response.data);
+      setBot(response.data); // console.log(response.data) You Can active this datas for seing
     });
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {

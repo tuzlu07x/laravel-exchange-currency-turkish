@@ -11,7 +11,7 @@ function Example() {
         axios.get('/borsa-bot/bot')
             .then(response => {
                 setBot(response.data);
-                console.log(response.data)
+                // console.log(response.data) You Can active this datas for seing
             })
 
     }, []);
