@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApiController;
 use App\Http\Controllers\BotController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [BotController::class, 'index'])->name('index');
+Route::get('/bot', [ApiController::class, 'bot']);
