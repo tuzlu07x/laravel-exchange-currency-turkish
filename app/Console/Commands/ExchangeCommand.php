@@ -33,7 +33,7 @@ class ExchangeCommand extends Command
 
         foreach ($bot->getAll() as $bot) {
 
-            $exchange = Exchange::updateOrCreate([
+            Exchange::updateOrCreate([
                 'name' => $bot['name'],
             ], [
                 'sell' => $bot['data'][0],
