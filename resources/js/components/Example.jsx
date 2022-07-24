@@ -24,10 +24,10 @@ function Example() {
 
                     {bots.map(bot => (
                         <div className='col-md-3 mt-3'>
-                            <div className='card text-bg-primary'>
+                            <div className='card text-primary'>
                                 <div className='card-header'>
+                                    <i class="fa-solid fa-arrow-down"></i>
                                     {bot.name}
-
                                 </div>
                                 <div className='card-body'>
                                     <strong>Buy : </strong>
