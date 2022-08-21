@@ -5457,11 +5457,14 @@ function Example() {
       bots = _useState2[0],
       setBot = _useState2[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get('/borsa-bot/bot').then(function (response) {
-      setBot(response.data); // console.log(response.data) You Can active this datas for seing
-    });
-  }, []);
+  window.onload = function () {
+    setInterval(function () {
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('/borsa-bot/bot').then(function (response) {
+        setBot(response.data);
+      });
+    }, 1000);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "container mt-5",
@@ -5475,7 +5478,7 @@ function Example() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                 className: "card-header",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-                  "class": "fa-solid fa-arrow-down"
+                  className: "fa-solid fa-arrow-down"
                 }), bot.name]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                 className: "card-body",
@@ -5490,6 +5493,14 @@ function Example() {
                   children: "Sell : "
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("strong", {
                   children: [bot.sell, " \u20BA"]
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "card-body",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                  children: "Status : "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+                  className: "text-warning",
+                  children: bot.differance
                 })]
               })]
             })

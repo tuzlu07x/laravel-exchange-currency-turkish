@@ -7,15 +7,14 @@ function Example() {
 
     const [bots, setBot] = useState([]);
 
-    useEffect(() => {
-        axios.get('/borsa-bot/bot')
-            .then(response => {
-                setBot(response.data);
-                // console.log(response.data) You Can active this datas for seing
-            })
-
-    }, []);
-
+    window.onload = function () {
+        setInterval(function () {
+            axios.get('/borsa-bot/bot')
+                .then(response => {
+                    setBot(response.data);
+                })
+        }, 1000);
+    }
 
     return (
         <div>
@@ -26,7 +25,7 @@ function Example() {
                         <div className='col-md-3 mt-3'>
                             <div className='card text-primary'>
                                 <div className='card-header'>
-                                    <i class="fa-solid fa-arrow-down"></i>
+                                    <i className='fa-solid fa-arrow-down'></i>
                                     {bot.name}
                                 </div>
                                 <div className='card-body'>
@@ -36,6 +35,10 @@ function Example() {
                                 <div className='card-body'>
                                     <strong>Sell : </strong>
                                     <strong>{bot.sell} ₺</strong>
+                                </div>
+                                <div className='card-body'>
+                                    <strong>Status : </strong>
+                                    <strong className='text-warning'>{bot.differance}</strong>
                                 </div>
                             </div>
                         </div>
